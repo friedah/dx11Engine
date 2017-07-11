@@ -1,0 +1,22 @@
+# ignore all intermediate  file
+*Release*/
+*Debug*/
+*.user
+*.ncb  
+*.sno
+*.obj
+*.htm
+*.mac
+*.pch
+*.exp
+*.pdb
+*.log
+*.plg
+*.sno
+*.suo
+*.scc
+*.wrn
+*.err
+**/bin
+lib/
+*.bak
