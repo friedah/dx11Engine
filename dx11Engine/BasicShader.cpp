@@ -69,7 +69,7 @@ bool BasicShader::Apply(ID3D11DeviceContext* deviceContext)
 		DirtyClear();
 	}
 	{
-		deviceContext->VSSetConstantBuffers(constantBufferNum, 1, constantBuffer.GetAddressOf());
+		deviceContext->VSSetConstantBuffers(0, constantBufferNum, constantBuffer.GetAddressOf());
 	}
 	deviceContext->VSSetShader(vsPtr.Get(), NULL, 0);
 	deviceContext->PSSetShader(psPtr.Get(), NULL, 0);

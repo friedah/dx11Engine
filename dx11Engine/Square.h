@@ -12,7 +12,7 @@ class Square:public Model
 	};
 	static const int vertexnum = 8, indexnum = 36;
 	static const DirectX::XMFLOAT3 vertexs[vertexnum];
-	static const int indexs[indexnum];
+	static const uint16_t indexs[indexnum];
 	static const int InputElementCount = 2;
 	static const D3D11_INPUT_ELEMENT_DESC InputElements[InputElementCount];
 	Vertex m_vertexs[vertexnum];

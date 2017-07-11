@@ -11,7 +11,7 @@ const DirectX::XMFLOAT3 Square::vertexs[Square::vertexnum] =
 	DirectX::XMFLOAT3(+1.0f, +1.0f, +1.0f),
 	DirectX::XMFLOAT3(+1.0f, -1.0f, +1.0f),
 };
-const int Square::indexs[Square::indexnum] =
+const uint16_t Square::indexs[Square::indexnum] =
 {
 	// front face
 	0, 1, 2,
@@ -66,6 +66,7 @@ void Square::GeneralVertexData()
 	for (size_t i = 0; i < vertexnum; i++)
 	{
 		m_vertexs[i].pos = vertexs[i];
+		m_vertexs[i].normal = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 		//vertexnormal[i] = DirectX::XMVectorZero();
 	}
 	//for (size_t i = 0; i < indexnum; i+= 3)
