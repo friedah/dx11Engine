@@ -1,27 +1,31 @@
 #pragma once
 #include "Model.h"
+#include "TextureClass.h"
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 #include <DirectXCollision.h>
-class Square:public Model
+#include <memory>
+class BasicModel:public Model
 {
 	struct Vertex
 	{
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 normal;
+		DirectX::XMFLOAT2 texcoord;
 	};
-	static const int vertexnum = 8, indexnum = 36;
-	static const DirectX::XMFLOAT3 vertexs[vertexnum];
-	static const uint16_t indexs[indexnum];
-	static const int InputElementCount = 2;
-	static const D3D11_INPUT_ELEMENT_DESC InputElements[InputElementCount];
-	Vertex m_vertexs[vertexnum];
+	std::unique_ptr<Vertex[]> m_model;
+	std::unique_ptr<unsigned short[]> m_index;
+	std::shared_ptr<TextureClass> m_Texture;
+	bool LoadModel(char* filename);
+	bool LoadTexture(ID3D11Device* device, WCHAR* filename);
+	virtual bool CreateModel(ID3D11Device* d3dDevice) override;
 public:
-	Square();
-	virtual ~Square();
-	virtual void Release() override;
-	void GeneralVertexData();
-	virtual bool CreateModel(ID3D11Device* d3dDevice, ID3D11DeviceContext* deviceContext, void const* shaderByteCode, size_t byteCodeLength) override;
+	TextureClass* getTexture()const { return m_Texture.get(); }
+	BasicModel();
+	virtual ~BasicModel();
+	bool Initialize(ID3D11Device* device, char* modelFilename, WCHAR* textureFilename);
+
 	virtual bool Draw(ID3D11DeviceContext* deviceContext) override;
+
 };
 

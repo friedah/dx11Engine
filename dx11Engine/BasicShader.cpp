@@ -1,9 +1,20 @@
 #include "BasicShader.h"
 #include"BasicHelper.h"
 
-
-BasicShader::BasicShader()
+const D3D11_INPUT_ELEMENT_DESC BasicShader::InputElements[] =
 {
+	{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	{ "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+	{ "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,    0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+};
+const WCHAR BasicShader::vs_path[MAXPATHLEN] = L"../Shader/basic.vs";
+const WCHAR BasicShader::ps_path[MAXPATHLEN] = L"../Shader/basic.ps";
+const WCHAR BasicShader::vs_path_tex[MAXPATHLEN] = L"../Shader/basictex.vs";
+const WCHAR BasicShader::ps_path_tex[MAXPATHLEN] = L"../Shader/basictex.ps";
+BasicShader::BasicShader(bool texture_en):m_texure_en(texture_en)
+{
+	auto count = m_texure_en ? TexElementCount : BaiscElementCount;
+	vbDecl = std::make_shared<std::vector<D3D11_INPUT_ELEMENT_DESC>>(InputElements, InputElements + count);
 }
 
 
@@ -11,31 +22,17 @@ BasicShader::~BasicShader()
 {
 	
 }
-void BasicShader::Release()
+bool BasicShader::SetTexture(TextureClass *texture)
 {
+	m_texture = texture;
 }
+
+
 bool BasicShader::Initialize(HWND hwnd, ID3D11Device* device)
 {
 	m_vertexShaderData = std::make_shared<ShaderData>();
-
-	Microsoft::WRL::ComPtr<ID3D11VertexShader> vs;
-	{
-		ID3D10Blob* shader = 0;
-		FALSERETURN(CompileShaderFile(hwnd, L"../Shader/basic.vs", "vs_5_0", &shader));
-		FAILEDRETURN(device->CreateVertexShader(shader->GetBufferPointer(), shader->GetBufferSize(), NULL, vs.GetAddressOf()));
-		m_vertexShaderData.get()->size = shader->GetBufferSize();
-		m_vertexShaderData.get()->shaderCode = new BYTE[shader->GetBufferSize()];
-		memcpy(m_vertexShaderData.get()->shaderCode, shader->GetBufferPointer(), shader->GetBufferSize());
-		shader->Release();
-	}
-
-	Microsoft::WRL::ComPtr<ID3D11PixelShader> ps;
-	{
-		ID3D10Blob* shader = 0;
-		FALSERETURN(CompileShaderFile(hwnd, L"../Shader/basic.ps", "ps_5_0", &shader));
-		FAILEDRETURN(device->CreatePixelShader(shader->GetBufferPointer(), shader->GetBufferSize(), NULL, ps.GetAddressOf()));
-		shader->Release();
-	}
+	const WCHAR *t[SHADER_NUM] = { m_texure_en ? vs_path_tex : vs_path, nullptr, nullptr, nullptr, m_texure_en? ps_path_tex : ps_path, nullptr };
+	FALSERETURN(CreateShader(hwnd, device, t));
 
 	Microsoft::WRL::ComPtr<ID3D11Buffer> buf;
 	{
@@ -49,8 +46,6 @@ bool BasicShader::Initialize(HWND hwnd, ID3D11Device* device)
 		FAILEDRETURN(device->CreateBuffer(&desc, NULL, buf.GetAddressOf()));
 	}
 
-	vsPtr = vs;
-	psPtr = ps;
 	constantBuffer = buf;
 	return true;
 }
@@ -70,14 +65,9 @@ bool BasicShader::Apply(ID3D11DeviceContext* deviceContext)
 	}
 	{
 		deviceContext->VSSetConstantBuffers(0, constantBufferNum, constantBuffer.GetAddressOf());
+		if(m_texture)
+			deviceContext->PSSetShaderResources(0, 1, m_texture->GetTexture());
 	}
-	deviceContext->VSSetShader(vsPtr.Get(), NULL, 0);
-	deviceContext->PSSetShader(psPtr.Get(), NULL, 0);
+	Shader::Apply(deviceContext);
 	return true;
-}
-
-void BasicShader::GetVertexShaderBytecode(void const** pShaderByteCode, size_t* pByteCodeLength)
-{
-	(*pShaderByteCode) = m_vertexShaderData.get()->shaderCode;
-	(*pByteCodeLength) = m_vertexShaderData.get()->size;
 }

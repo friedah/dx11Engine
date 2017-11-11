@@ -42,12 +42,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	
 	m_basicShader = std::make_shared<BasicShader>();
 	FALSERETURN(m_basicShader.get()->Initialize(hwnd, m_Direct3D->GetDevice()));
-	const void*  shaderCode = NULL;
-	size_t shadersize;
-	m_basicShader.get()->GetVertexShaderBytecode(&shaderCode, &shadersize);
 
-	m_square = std::make_shared<Square>();
-	FALSERETURN(m_square.get()->CreateModel(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), shaderCode, shadersize));
+	m_square = std::make_shared<BasicModel>();
+	FALSERETURN(m_square.get()->Initialize(m_Direct3D->GetDevice(), "../Engine/data/cube.txt", L"../Engine/data/seafloor.dds"));
 
 	m_camera = std::make_shared<CameraClass>();
 	m_camera.get()->SetPosition(0.0f, 0.0f, -10.0f);

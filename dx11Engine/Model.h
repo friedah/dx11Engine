@@ -7,22 +7,22 @@
 class Model
 {
 protected:
-	uint32_t                                                indexCount;
-	uint32_t                                                startIndex;
-	uint32_t                                                vertexOffset;
-	uint32_t                                                vertexStride;
-	D3D_PRIMITIVE_TOPOLOGY                                  primitiveType;
-	DXGI_FORMAT                                             indexFormat;
-	Microsoft::WRL::ComPtr<ID3D11InputLayout>               inputLayout;
+	uint32_t                                                indexCount = 0;
+	uint32_t                                                startIndex = 0;
+	uint32_t                                                vertexCount = 0;
+	uint32_t                                                vertexOffset = 0;
+	uint32_t                                                vertexStride = 0;
+	D3D_PRIMITIVE_TOPOLOGY                                  primitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	DXGI_FORMAT                                             indexFormat = DXGI_FORMAT_R16_UINT;
 	Microsoft::WRL::ComPtr<ID3D11Buffer>                    indexBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Buffer>                    vertexBuffer;
-	std::shared_ptr<std::vector<D3D11_INPUT_ELEMENT_DESC>>  vbDecl;
 	bool m_init;
 public:
 	Model();
 	virtual ~Model();
-	virtual void Release() = 0;
-	virtual bool CreateModel(ID3D11Device* d3dDevice, ID3D11DeviceContext* deviceContext, void const* shaderByteCode, size_t byteCodeLength) = 0;
-	virtual bool Draw(ID3D11DeviceContext* deviceContext) = 0;
+	virtual void Release() {};
+	virtual bool CreateModel(ID3D11Device* d3dDevice) = 0;
+	bool CreateDataBuffer(ID3D11Device* d3dDevice, const size_t &vbsize, const void *vbData, const size_t &ibsize, const void *ibData);
+	virtual bool Draw(ID3D11DeviceContext* deviceContext) ;
 };
 

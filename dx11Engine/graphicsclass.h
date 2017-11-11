@@ -38,7 +38,7 @@ protected:
 	virtual bool Render();
 	D3DClass* m_Direct3D;
 private:
-	std::shared_ptr<Square> m_square;
+	std::shared_ptr<BasicModel> m_square;
 	std::shared_ptr<BasicShader> m_basicShader;
 	std::shared_ptr<CameraClass> m_camera;
 };

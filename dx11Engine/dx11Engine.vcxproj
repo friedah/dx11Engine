@@ -156,9 +156,6 @@
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="TextureClass.cpp" />
-    <ClCompile Include="Triangle\colorshaderclass.cpp" />
-    <ClCompile Include="Triangle\modelclass.cpp" />
-    <ClCompile Include="Triangle\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicHelper.h" />
@@ -173,9 +170,6 @@
     <ClInclude Include="Square.h" />
     <ClInclude Include="systemclass.h" />
     <ClInclude Include="TextureClass.h" />
-    <ClInclude Include="Triangle\colorshaderclass.h" />
-    <ClInclude Include="Triangle\modelclass.h" />
-    <ClInclude Include="Triangle\Triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

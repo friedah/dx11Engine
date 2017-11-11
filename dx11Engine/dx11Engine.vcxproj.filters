@@ -57,9 +57,6 @@
     <ClCompile Include="graphicsclass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="TextureClass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Model\Source Files</Filter>
     </ClCompile>
@@ -75,14 +72,8 @@
     <ClCompile Include="cameraclass.cpp">
       <Filter>Camera\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle\colorshaderclass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle\modelclass.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle\Triangle.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="TextureClass.cpp">
+      <Filter>Model\Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +87,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="graphicsclass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureClass.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
@@ -122,14 +110,8 @@
     <ClInclude Include="cameraclass.h">
       <Filter>Camera\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle\colorshaderclass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle\modelclass.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle\Triangle.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="TextureClass.h">
+      <Filter>Model\Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
