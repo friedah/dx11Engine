@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <memory>
 #include <vector>
+#include <directxmath.h>
+
+
 class Model
 {
 protected:
@@ -17,6 +20,12 @@ protected:
 	Microsoft::WRL::ComPtr<ID3D11Buffer>                    indexBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Buffer>                    vertexBuffer;
 	bool m_init;
+
+	DirectX::XMMATRIX m_worldMatrix;
+	DirectX::XMFLOAT3 m_position;
+	DirectX::XMFLOAT3 m_scale;
+	DirectX::XMFLOAT3 m_rotation;
+
 public:
 	Model();
 	virtual ~Model();
@@ -24,5 +33,9 @@ public:
 	virtual bool CreateModel(ID3D11Device* d3dDevice) = 0;
 	bool CreateDataBuffer(ID3D11Device* d3dDevice, const size_t &vbsize, const void *vbData, const size_t &ibsize, const void *ibData);
 	virtual bool Draw(ID3D11DeviceContext* deviceContext) ;
+	void GetWorldMatrix(DirectX::XMMATRIX&);
+	void SetPosition(const float &x, const float &y, const float &z);
+	void SetScale(const float &x, const float &y, const float &z);
+	void SetRotate(const float &x, const float &y, const float &z);
 };
 

@@ -40,6 +40,15 @@
     <Filter Include="Camera\Source Files">
       <UniqueIdentifier>{ae547a2a-fad1-4a6a-88e8-7547d24812e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Light">
+      <UniqueIdentifier>{1af60005-6595-467d-8cd4-e578f9959e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light\Header Files">
+      <UniqueIdentifier>{530e3ac2-9674-4f2a-a7a9-28a984aae0d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light\Source Files">
+      <UniqueIdentifier>{ddf318d9-d1b4-4830-877c-d984016eed43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="inputclass.cpp">
@@ -60,9 +69,6 @@
     <ClCompile Include="Model.cpp">
       <Filter>Model\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
-      <Filter>Model\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Shader\Source Files</Filter>
     </ClCompile>
@@ -74,6 +80,12 @@
     </ClCompile>
     <ClCompile Include="TextureClass.cpp">
       <Filter>Model\Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicModel.cpp">
+      <Filter>Model\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,9 +102,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Model\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
       <Filter>Model\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Helpers.h">
@@ -112,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="TextureClass.h">
       <Filter>Model\Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicModel.h">
+      <Filter>Model\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

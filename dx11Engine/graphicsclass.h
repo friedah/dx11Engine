@@ -10,8 +10,9 @@
 ///////////////////////
 #include "d3dclass.h"
 #include "BasicShader.h"
-#include "Square.h"
+#include "BasicModel.h"
 #include "cameraclass.h"
+#include "Light.h"
 /////////////
 // GLOBALS //
 /////////////
@@ -35,12 +36,13 @@ public:
 	void Shutdown();
 	bool Frame();
 protected:
-	virtual bool Render();
+	virtual bool Render(const float &rotation);
 	D3DClass* m_Direct3D;
 private:
 	std::shared_ptr<BasicModel> m_square;
 	std::shared_ptr<BasicShader> m_basicShader;
 	std::shared_ptr<CameraClass> m_camera;
+	std::shared_ptr<Light> m_light;
 };
 
 #endif

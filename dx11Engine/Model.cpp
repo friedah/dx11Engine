@@ -3,10 +3,34 @@
 
 
 
-Model::Model():m_init(false)
+Model::Model():m_init(false), m_worldMatrix(DirectX::XMMatrixIdentity()), m_position(0.0f, 0.0f, 0.0f), m_scale(1.0f,1.0f, 1.0f), m_rotation(0.0f,0.0f,0.0f)
 {
 }
+void Model::GetWorldMatrix(DirectX::XMMATRIX& m)
+{
+	DirectX::XMMATRIX translation = DirectX::XMMatrixTranslation(m_position.x, m_position.y, m_position.z);
+	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(m_rotation.x, m_rotation.y, m_rotation.z);
 
+	DirectX::XMMATRIX scale = DirectX::XMMatrixScaling(m_scale.x, m_scale.y, 1.0f);
+
+	m_worldMatrix = translation * rotationMatrix * scale;
+	m = m_worldMatrix;
+}
+void Model::SetPosition(const float& x, const float& y, const float& z)
+{
+	m_position = DirectX::XMFLOAT3(x, y ,z);
+}
+
+void Model::SetRotate(const float& x, const float& y, const float& z)
+{
+	m_rotation = DirectX::XMFLOAT3(x, y, z);
+
+}
+void Model::SetScale(const float& x, const float& y, const float& z)
+{
+	m_scale = DirectX::XMFLOAT3(x, y, z);
+
+}
 
 Model::~Model()
 {

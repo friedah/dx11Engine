@@ -204,7 +204,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
      result = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1, 
                                             D3D11_SDK_VERSION, &swapChainDesc, &m_swapChain, &m_device, NULL, &m_deviceContext);
 
-	//result = D3D11CreateDevice(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1,  D3D11_SDK_VERSION, &m_device, NULL, &m_deviceContext);
+    //result = D3D11CreateDevice(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1,  D3D11_SDK_VERSION, &m_device, NULL, &m_deviceContext);
     if(FAILED(result))
     {
         return false;
@@ -343,8 +343,6 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
     // Create the projection matrix for 3D rendering.
     m_projectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
 
-    // Initialize the world matrix to the identity matrix.
-    m_worldMatrix = XMMatrixIdentity();
 
     // Create an orthographic projection matrix for 2D rendering.
     m_orthoMatrix = XMMatrixOrthographicLH((float)screenWidth, (float)screenHeight, screenNear, screenDepth);
@@ -471,11 +469,6 @@ void D3DClass::GetProjectionMatrix(XMMATRIX& projectionMatrix)
 }
 
 
-void D3DClass::GetWorldMatrix(XMMATRIX& worldMatrix)
-{
-    worldMatrix = m_worldMatrix;
-    return;
-}
 
 
 void D3DClass::GetOrthoMatrix(XMMATRIX& orthoMatrix)
